@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgy Ganaga</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/logo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demon-animations.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    {% block styles %}{% endblock %}
+    {% block head %}{% endblock %}
+
+    <!-- Поддержка ES модулей -->
+    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="theme-toggle-container">
+            <a href="#" class="theme-menu-toggle">
+                <i class="far fa-gem theme-icon gem-icon"></i>
+                <i class="far fa-moon theme-icon moon-icon"></i>
+            </a>
+        </div>
+        <a href="/" class="logo-link">
+            <div class="logo-container">
+                <span class="logo-text logo-g">G</span>
+                <span class="logo-text logo-a1-from-g">A</span>
+                <span class="logo-text logo-n">N</span>
+                <span class="logo-text logo-a2-from-n">A</span>
+                <span class="logo-text logo-g2">G</span>
+                <span class="logo-text logo-a3-from-g2">A</span>
+            </div>
+        </a>
+        <ul>
+            <li><a href="/about" class="no-effect"><i class="far fa-user"></i> О проекте</a></li>
+            <li><a href="/portfolio" class="no-effect"><i class="far fa-briefcase"></i> Портфолио</a></li>
+            <li><a href="/contact" class="no-effect"><i class="far fa-envelope"></i> Контакты</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('ai.ai_assistant') }}">ИИ-Помощник</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    {% block scripts %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/particles.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='js/hyperspeed.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='js/theme-switcher.js') }}" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>
