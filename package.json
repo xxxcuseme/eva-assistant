@@ -2,9 +2,15 @@
   "name": "eva-assistant",
   "version": "1.0.0",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "three": "^0.151.3"
   },
   "scripts": {
-    "build": "npm install"
+    "build": "npm install",
+    "dev": "netlify dev"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^1.0.0",
+    "esbuild": "^0.14.54"
   }
 }

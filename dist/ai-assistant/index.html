@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-interface">
+    <div id="model-container">
+        <!-- Речевой пузырь -->
+        <div id="speech-bubble" class="speech-bubble"></div>
+    </div>
+    
+    <div class="chat-window">
+        <div class="chat-content">
+            <div class="chat-header">
+                <h3>AI Assistant</h3>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+        </div>
+        
+        <div class="chat-input-area">
+            <form id="chat-form" class="chat-form">
+                <input type="text" id="chat-input" placeholder="Введите сообщение...">
+                <button type="submit" id="chat-send" aria-label="Отправить"></button>
+                <button type="button" id="chat-reset" aria-label="Сбросить чат">Очистить чат</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Three.js и модули -->
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
+    }
+}
+</script>
+
+<!-- Наши скрипты -->
+<script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    
+    window.THREE = THREE;
+    window.GLTFLoader = GLTFLoader;
+    window.OrbitControls = OrbitControls;
+</script>
+
+<script type="module" src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

@@ -1,48 +1,7 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eva AI Assistant</title>
-    <link rel="stylesheet" href="/static/css/chat.css">
-</head>
-<body>
-    <div class="chat-interface">
-        <div id="model-container">
-            <div id="speech-bubble" class="speech-bubble"></div>
-        </div>
-        
-        <div class="chat-window">
-            <div class="chat-content">
-                <div class="chat-header">
-                    <h3>AI Assistant</h3>
-                </div>
-                <div class="chat-messages" id="chat-messages"></div>
-            </div>
-            
-            <div class="chat-input-area">
-                <form id="chat-form" class="chat-form">
-                    <input type="text" id="chat-input" placeholder="Введите сообщение...">
-                    <button type="submit" id="chat-send" aria-label="Отправить"></button>
-                    <button type="button" id="chat-reset" aria-label="Сбросить чат">Очистить чат</button>
-                </form>
-            </div>
-        </div>
-    </div>
+{% extends "base.html" %}
 
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
-        }
-    }
-    </script>
-    <script type="module" src="/static/js/three-imports.js"></script>
-    <script type="module" src="/static/demon/animations/animation_manager.js"></script>
-    <script type="module" src="/static/demon/core/bone-helper.js"></script>
-    <script type="module" src="/static/demon/arms/wave.js"></script>
-    <script type="module" src="/static/demon/legs/movement.js"></script>
-    <script type="module" src="/static/js/chat.js"></script>
-</body>
-</html>
+{% block content %}
+<div class="main-content">
+    <!-- Здесь контент главной страницы -->
+</div>
+{% endblock %}

@@ -3,11 +3,27 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# Маршрут для API функций
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+  force = true
 
+# Маршрут для AI Assistant
+[[redirects]]
+  from = "/ai-assistant/*"
+  to = "/ai-assistant/index.html"
+  status = 200
+  force = true
+
+# Маршрут для статических файлов
+[[redirects]]
+  from = "/static/*"
+  to = "/static/:splat"
+  status = 200
+
+# Маршрут для корневой страницы
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -17,9 +33,11 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# CORS заголовки
 [[headers]]
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Cache-Control = "public, max-age=0, must-revalidate"
