@@ -1,0 +1,332 @@
+/* Основной контейнер */
+.chat-interface {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Контейнер для 3D модели */
+#model-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Окно чата */
+.chat-window {
+    position: fixed;
+    top: 80px;
+    bottom: 50px;
+    right: 60px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    z-index: 2;
+}
+
+/* Основная часть чата */
+.chat-content {
+    flex: 1;
+    background: rgba(20, 20, 35, 0.85);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Заголовок чата */
+.chat-header {
+    padding: 20px 25px;
+    border-radius: 24px 24px 0 0;
+    min-height: 70px;
+}
+
+.chat-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Область сообщений */
+.chat-messages {
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    mask-image: linear-gradient(to bottom, 
+        transparent 0,
+        black 30px,
+        black calc(100% - 30px),
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(to bottom, 
+        transparent 0,
+        black 30px,
+        black calc(100% - 30px),
+        transparent 100%
+    );
+    padding-bottom: 50px;
+}
+
+/* Стили сообщений */
+.message {
+    padding: 12px 18px;
+    border-radius: 18px;
+    max-width: 85%;
+    word-wrap: break-word;
+    line-height: 1.4;
+    font-size: 0.95em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.message:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.user-message {
+    background: linear-gradient(135deg, #3f4e59, #1976D2);
+    color: white;
+    align-self: flex-end;
+    margin-left: 15%;
+    border-bottom-right-radius: 5px;
+}
+
+.assistant-message {
+    background: rgba(255, 255, 255, 0.1);
+    color: #E0E0E0;
+    align-self: flex-start;
+    margin-right: 15%;
+    border-bottom-left-radius: 5px;
+}
+
+/* Область ввода */
+.chat-input-area {
+    
+    padding: 15px;
+   
+    position: relative;
+    height: 70px;
+}
+
+.chat-form {
+    display: flex;
+    position: relative;
+}
+
+#chat-input {
+    width: 100%;
+    padding: 16px 60px 16px 20px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+#chat-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
+}
+
+#chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Кнопка отправки */
+#chat-send {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+}
+
+#chat-send:hover {
+    background: linear-gradient(135deg, #c1e2fe, #657587);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+/* Иконка стрелки */
+#chat-send::before {
+    content: '↑';
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+/* Кнопка броса */
+#chat-reset {
+    position: absolute;
+    top: -45px;
+    right: 15px;
+    background: rgba(20, 20, 35, 0);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 8px 15px;
+    
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#chat-reset::before {
+    content: '↺';
+    font-size: 1.2em;
+}
+
+#chat-reset:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Скроллбар */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Анимации */
+@keyframes messageAppear {
+    from { 
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message {
+    animation: messageAppear 0.3s ease-out forwards;
+}
+
+/* Состояния загрузки и ошибок */
+.loading {
+    opacity: 0.7;
+    position: relative;
+    padding-right: 40px;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.error {
+    background: rgba(244, 67, 54, 0.2);
+    color: #FF5252;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+/* Речевой пузырь */
+.speech-bubble {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    color: #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    opacity: 0;
+    transition: all 0.5s ease;
+    min-width: 200px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.9) transparent transparent;
+}
+
+.speech-bubble.show {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+}
+
+/* Анимация появления */
+@keyframes bubbleAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -90%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1);
+    }
+}
+
+.speech-bubble.show {
+    animation: bubbleAppear 0.5s ease forwards;
+}
