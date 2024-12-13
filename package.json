@@ -1,16 +1,24 @@
 {
   "name": "eva-assistant",
   "version": "1.0.0",
+  "description": "Eva AI Assistant with 3D animations",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install",
+    "dev": "netlify dev",
+    "start": "netlify dev"
+  },
   "dependencies": {
     "node-fetch": "^2.6.1",
     "three": "^0.151.3"
   },
-  "scripts": {
-    "build": "npm install",
-    "dev": "netlify dev"
-  },
   "devDependencies": {
     "@netlify/functions": "^1.0.0",
-    "esbuild": "^0.14.54"
+    "esbuild": "^0.14.54",
+    "@types/three": "^0.151.0",
+    "netlify-cli": "^12.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

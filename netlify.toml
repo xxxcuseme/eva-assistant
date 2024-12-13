@@ -3,17 +3,31 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# Маршруты для страниц
+[[redirects]]
+  from = "/about"
+  to = "/about/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio"
+  to = "/portfolio/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/chat"
+  to = "/chat/index.html"
+  status = 200
+
 # Маршрут для API функций
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
-  status = 200
-  force = true
-
-# Маршрут для AI Assistant
-[[redirects]]
-  from = "/ai-assistant/*"
-  to = "/ai-assistant/index.html"
   status = 200
   force = true
 
@@ -33,7 +47,14 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# CORS заголовки
+[dev]
+  framework = "#custom"
+  command = "npm run dev"
+  targetPort = 5000
+  port = 8888
+  publish = "dist"
+
+# CORS и кэширование
 [[headers]]
   for = "/*"
     [headers.values]
