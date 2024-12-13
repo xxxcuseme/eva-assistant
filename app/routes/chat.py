@@ -64,6 +64,8 @@ chat_bp = Blueprint('chat', __name__)
 # Определяем системный промпт глобально
 SYSTEM_PROMPT = "Ты Eva - дружелюбный AI-ассистент. Используй эмодзи. Отвечай кратко."
 
+OLLAMA_HOST = os.getenv('OLLAMA_HOST', 'http://your_ollama_server:11434')
+
 def get_system_stats():
     stats = {
         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
@@ -104,7 +106,7 @@ def get_system_stats():
     return stats
 
 def format_stats(stats):
-    """Форматиру��т статистику для вывода в лог"""
+    """Форматирует статистику для вывода в лог"""
     return f"""=== Системная статистика ===
 CPU:
     Загрузка: {stats['cpu']['percent']}%
@@ -127,6 +129,7 @@ GPU: {stats['gpu'] if 'gpu' in stats else 'Не доступен'}"""
 def get_cached_response(message, temperature):
     """Кэширует ответы для одинаковых сообщений"""
     return ollama.chat(
+        host=OLLAMA_HOST,
         model='mistral:7b',
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},

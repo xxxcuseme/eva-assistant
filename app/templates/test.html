@@ -1,1 +1,19 @@
- 
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Static File Test</h1>
+<p>Testing static file serving...</p>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/static/demon/model/demon.glb')
+        .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+</script>
+{% endblock %}

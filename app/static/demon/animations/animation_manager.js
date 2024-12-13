@@ -130,21 +130,77 @@ export class AnimationManager {
     }
 
     startBaseAnimations() {
+        console.log('Запуск базовых анимаций...');
+        
+        // Проверяем наличие костей перед запуском
+        console.log('Состояние костей:', {
+            base: !!this.bones.base,
+            leftLeg: {
+                upper: !!this.bones.leftLeg.upper,
+                lower: !!this.bones.leftLeg.lower
+            },
+            rightLeg: {
+                upper: !!this.bones.rightLeg.upper,
+                lower: !!this.bones.rightLeg.lower
+            }
+        });
+
         const animate = () => {
             const time = Date.now() * 0.001;
             
-            // Дыхание (движение всего тела)
+            // Дыхание
             if (this.bones.base) {
-                this.bones.base.position.y = Math.sin(time * 2) * 0.05;
-                this.bones.base.rotation.z = Math.sin(time * 2) * 0.02;
+                const breathIntensity = 0.03;
+                const breathSpeed = 1.5;
+                this.bones.base.position.y = Math.sin(time * breathSpeed) * breathIntensity;
+                this.bones.base.rotation.z = Math.sin(time * breathSpeed) * 0.015;
+                this.bones.base.rotation.x = Math.sin(time * breathSpeed * 0.5) * 0.01;
+                
+                // Обновляем матрицы
+                this.bones.base.updateMatrix();
+                this.bones.base.updateMatrixWorld(true);
             }
 
-            // Покачивание головы
-            if (this.bones.head) {
-                this.bones.head.rotation.z = Math.sin(time * 1.5) * 0.1;
-                this.bones.head.rotation.y = Math.cos(time) * 0.05;
+            // Анимация ног
+            if (this.bones.leftLeg.upper && this.bones.rightLeg.upper) {
+                // Легкое покачивание
+                const legSwayAmount = 0.1; // Увеличили амплитуду
+                const legSwaySpeed = 1.5;
+                
+                // Левая нога
+                this.bones.leftLeg.upper.rotation.x = Math.sin(time * legSwaySpeed) * legSwayAmount;
+                if (this.bones.leftLeg.lower) {
+                    this.bones.leftLeg.lower.rotation.x = Math.abs(Math.sin(time * legSwaySpeed)) * 0.05;
+                }
+                
+                // Правая нога (в противофазе)
+                this.bones.rightLeg.upper.rotation.x = -Math.sin(time * legSwaySpeed) * legSwayAmount;
+                if (this.bones.rightLeg.lower) {
+                    this.bones.rightLeg.lower.rotation.x = Math.abs(Math.sin(time * legSwaySpeed + Math.PI)) * 0.05;
+                }
+                
+                // Обновляем матрицы ног
+                this.bones.leftLeg.upper.updateMatrix();
+                this.bones.leftLeg.upper.updateMatrixWorld(true);
+                this.bones.rightLeg.upper.updateMatrix();
+                this.bones.rightLeg.upper.updateMatrixWorld(true);
+                
+                if (this.bones.leftLeg.lower) {
+                    this.bones.leftLeg.lower.updateMatrix();
+                    this.bones.leftLeg.lower.updateMatrixWorld(true);
+                }
+                if (this.bones.rightLeg.lower) {
+                    this.bones.rightLeg.lower.updateMatrix();
+                    this.bones.rightLeg.lower.updateMatrixWorld(true);
+                }
             }
 
+            // Анимация рук
+            if (this.bones.leftArm.upper && this.bones.rightArm.upper) {
+                const armSwayAmount = 0.1; // Увеличили амплитуду
+                const armSwaySpeed = 1.2;
+                
+                // Левая рука
             // Покачивание рогов
             if (this.bones.leftHorn.base && this.bones.rightHorn.base) {
                 this.bones.leftHorn.base.rotation.z = -Math.PI/3 + Math.sin(time * 2) * 0.05;

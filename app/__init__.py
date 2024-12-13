@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 import logging
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -21,6 +22,17 @@ def create_app():
     @app.route('/')
     def index():
         return render_template('index.html')
+    
+    @app.route('/test')
+    def test():
+        return render_template('test.html')
+    
+    @app.route('/static/demon/model/<filename>')
+    def serve_model(filename):
+        model_dir = os.path.join(app.root_path, 'static', 'demon', 'model')
+        if os.path.exists(os.path.join(model_dir, filename)):
+            return send_from_directory(model_dir, filename)
+        return f"File not found: {filename}", 404
     
     logger.debug("Приложение создано успешно")
     return app

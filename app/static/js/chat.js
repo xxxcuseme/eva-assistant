@@ -2,6 +2,9 @@ const THREE = window.THREE;
 const GLTFLoader = window.GLTFLoader;
 const OrbitControls = window.OrbitControls;
 
+// Замените URL для API запросов
+const API_URL = '/.netlify/functions/chat';
+
 class ChatAssistant {
     constructor() {
         // Ждем загрузки Three.js и модулей
@@ -36,7 +39,7 @@ class ChatAssistant {
         const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
         directionalLight.position.set(0, 10, 10);
         this.scene.add(directionalLight);
-        
+
         // Настраиваем камеру
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.camera.position.set(0, 1.6, 3);
@@ -105,7 +108,7 @@ class ChatAssistant {
         this.chatInput.value = '';
 
         try {
-            const response = await fetch('/chat/message', {
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -410,7 +413,7 @@ class ChatAssistant {
             const position = new THREE.Vector3();
             headBone.getWorldPosition(position);
 
-            // Преобразуем в экранные координаты
+            // Преобразуем в экранные координат��
             const screenPosition = position.project(this.camera);
             
             return {

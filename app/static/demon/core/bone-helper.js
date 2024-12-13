@@ -1,1 +1,3 @@
- 
+import { THREE } from '../../js/three-imports.js';
+
+// ... остальной код без изменений ...

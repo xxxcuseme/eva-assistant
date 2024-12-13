@@ -1,0 +1,36 @@
+[build]
+  command = "pip install -r requirements.txt && python setup.py"
+  publish = "app"
+  functions = "netlify/functions"
+
+[build.environment]
+  PYTHON_VERSION = "3.9"
+  NODE_VERSION = "16"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[dev]
+  framework = "#custom"
+  command = "python run.py"
+  targetPort = 5000
+  port = 8888
+  publish = "app"
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type" 
