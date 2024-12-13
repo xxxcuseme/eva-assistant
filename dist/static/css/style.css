@@ -1,30 +1,83 @@
-/* Добавим стили для новых страниц */
-.about-section,
-.portfolio-section,
-.contact-section {
-    padding: 2rem;
+/* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: #f0f2f5;
+}
+
+/* Навигация */
+.main-nav {
+    background: #1a1a2e;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
     gap: 2rem;
-    padding: 2rem 0;
 }
 
-.portfolio-item {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-.contact-content {
-    background: #fff;
+.nav-links a:hover {
+    color: #4a90e2;
+}
+
+/* Контент */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #4a90e2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
     margin-top: 2rem;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: #357abd;
 }
