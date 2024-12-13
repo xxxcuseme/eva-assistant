@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    z-index: 0;
+}
+
+.main-title {
+    font-size: 4.5rem;
+    color: #fff;
+    position: relative;
+    font-weight: 100;
+    letter-spacing: 6px;
+    cursor: pointer;
+    transition: opacity 0.8s ease;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.robot-head-container {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    width: 100px; /* Задайте ширину контейнера */
+    height: 100px; /* Задайте высоту контейнера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+}
+
+#robot-head-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.robot-speech-bubble {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 250px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 15px;
+    z-index: 1000;
+    opacity: 0;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 14px;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+}
+
+.robot-speech-bubble.show {
+    opacity: 1;
+    display: block;
+    transform: translate(-50%, -20px);
+}
+
+.row {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 50%;
+}
+
+.col-md-8 {
+    max-width: 350px;
+}
+
+.chat-input-container {
+    max-width: 350px;
+    margin: 0 auto 0 0;
+}
+
+#chat-messages {
+    max-height: 250px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+#user-input {
+    height: 40px;
+    font-size: 14px;
+    flex-grow: 1;
+}
+
+#send-message {
+    height: 40px;
+    padding: 0 15px;
+    width: auto;
+}

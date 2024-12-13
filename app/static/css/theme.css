@@ -1,0 +1,138 @@
+:root {
+    /* Светлая тема по умолчанию */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f4f4;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #00ffff;
+    --accent-color-hover: #0066ff;
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --nav-text: #333333;
+}
+
+/* Темная тема */
+.dark-theme {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent-color: #00ffff;
+    --accent-color-hover: #0066ff;
+    --nav-bg: rgba(30, 30, 30, 0.8);
+    --nav-text: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: 
+        background-color 0.3s, 
+        color 0.3s;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(45deg, var(--bg-primary), var(--bg-secondary));
+    position: relative;
+    z-index: 0;
+    transition: background 0.3s ease;
+}
+
+.main-title {
+    font-size: 4.5rem;
+    color: var(--text-primary);
+    position: relative;
+    font-weight: 100;
+    letter-spacing: 6px;
+    cursor: pointer;
+    transition: opacity 0.8s ease;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+}
+
+.navigation {
+    background: var(--nav-bg) !important;
+    transition: background 0.3s ease;
+}
+
+.navigation a {
+    color: var(--nav-text) !important;
+    transition: color 0.3s ease;
+}
+
+.theme-menu-toggle {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.theme-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.theme-icon.gem-icon {
+    opacity: 1;
+}
+
+.theme-icon.moon-icon {
+    opacity: 0;
+}
+
+.dark-theme .theme-icon.gem-icon {
+    opacity: 0;
+}
+
+.dark-theme .theme-icon.moon-icon {
+    opacity: 1;
+}
+
+.dark-theme .navigation {
+    background: var(--nav-bg) !important;
+}
+
+.dark-theme .navigation a {
+    color: var(--nav-text) !important;
+}
+
+/* Анимация переключения */
+body, 
+.navigation, 
+.theme-menu-toggle,
+.navigation a {
+    transition: 
+        background-color 0.3s, 
+        color 0.3s, 
+        background 0.3s,
+        transform 0.3s;
+}
+
+.dark-theme .particle {
+    background-color: #ffffff !important;
+}
+
+.light-theme .particle {
+    background-color: #000000 !important;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
