@@ -1,6 +1,5 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-// Конфигурация
 const CONFIG = {
   OLLAMA_HOST: process.env.OLLAMA_HOST || 'http://localhost:11434',
   OLLAMA_KEY: process.env.OLLAMA_SSH_KEY,
@@ -9,15 +8,6 @@ const CONFIG = {
 };
 
 exports.handler = async function(event, context) {
-  // Проверка метода
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method Not Allowed' })
-    };
-  }
-
-  // CORS заголовки
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -25,19 +15,12 @@ exports.handler = async function(event, context) {
     'Content-Type': 'application/json'
   };
 
-  // Обработка OPTIONS запроса
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
   try {
-    // Парсинг входящего сообщения
     const { message } = JSON.parse(event.body);
-    
     if (!message) {
       return {
         statusCode: 400,
@@ -46,7 +29,6 @@ exports.handler = async function(event, context) {
       };
     }
 
-    // Запрос к Ollama
     const response = await fetch(`${CONFIG.OLLAMA_HOST}/api/chat`, {
       method: 'POST',
       headers: {
@@ -56,31 +38,13 @@ exports.handler = async function(event, context) {
       body: JSON.stringify({
         model: CONFIG.MODEL,
         messages: [
-          {
-            role: "system",
-            content: CONFIG.SYSTEM_PROMPT
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ],
-        options: {
-          temperature: 0.7,
-          top_p: 0.9,
-          max_tokens: 150
-        }
+          { role: "system", content: CONFIG.SYSTEM_PROMPT },
+          { role: "user", content: message }
+        ]
       })
     });
 
-    // Проверка ответа
-    if (!response.ok) {
-      throw new Error(`Ollama API error: ${response.status}`);
-    }
-
     const data = await response.json();
-
-    // Форматирование ответа
     return {
       statusCode: 200,
       headers,
@@ -93,16 +57,13 @@ exports.handler = async function(event, context) {
 
   } catch (error) {
     console.error('Error:', error);
-
-    // Возвращаем ошибку
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
         error: 'Internal Server Error',
-        message: error.message,
-        timestamp: new Date().toISOString()
+        message: error.message
       })
     };
   }
-}; 
+};

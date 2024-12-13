@@ -1,11 +1,8 @@
 {
   "name": "eva-assistant",
   "version": "1.0.0",
-  "description": "AI Assistant with 3D animations",
-  "main": "index.js",
   "dependencies": {
-    "node-fetch": "^2.6.1",
-    "esbuild": "^0.14.54"
+    "node-fetch": "^2.6.1"
   },
   "scripts": {
     "build": "npm install"
