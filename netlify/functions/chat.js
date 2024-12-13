@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== 'POST') {
@@ -37,7 +37,8 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(data)
     };
